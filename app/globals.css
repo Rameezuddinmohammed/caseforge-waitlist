@@ -116,3 +116,22 @@ body:has(html:not(:last-child)) {
 .animate-spotlight {
   animation: spotlight-pulse 4s ease-in-out infinite;
 }
+
+/* Mobile scaling for better user experience */
+@media (max-width: 768px) {
+  body {
+    transform: scale(0.85);
+    transform-origin: top center;
+    width: 117.65%; /* Compensate for scale */
+    margin-left: -8.825%; /* Center the scaled content */
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    transform: scale(0.8);
+    transform-origin: top center;
+    width: 125%; /* Compensate for scale */
+    margin-left: -12.5%; /* Center the scaled content */
+  }
+}
