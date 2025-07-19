@@ -14,7 +14,7 @@ const sheets = google.sheets({ version: 'v4', auth });
 export async function addEmailToSheet(email: string) {
   try {
     const spreadsheetId = process.env.GOOGLE_SHEET_ID;
-    const range = 'Sheet1!A:B'; // Assuming emails go in column A, timestamp in column B
+    const range = 'Sheet1!A:B'; // Email and timestamp
 
     const values = [[email, new Date().toISOString()]];
     
@@ -34,6 +34,56 @@ export async function addEmailToSheet(email: string) {
   }
 }
 
+export async function updateUserData(email: string, userData: {
+  name: string;
+  background: string;
+  learningGoals: string;
+  experienceLevel: string;
+  learningPreferences: string;
+}) {
+  try {
+    const spreadsheetId = process.env.GOOGLE_SHEET_ID;
+    
+    // First, find the row with the email
+    const findRange = 'Sheet1!A:A';
+    const findResponse = await sheets.spreadsheets.values.get({
+      spreadsheetId,
+      range: findRange,
+    });
+
+    const values = findResponse.data.values || [];
+    const rowIndex = values.findIndex(row => row[0] === email);
+    
+    if (rowIndex === -1) {
+      return { success: false, error: 'Email not found' };
+    }
+
+    // Update the row with additional data (columns C through G)
+    const updateRange = `Sheet1!C${rowIndex + 1}:G${rowIndex + 1}`;
+    const updateValues = [[
+      userData.name,
+      userData.background,
+      userData.learningGoals,
+      userData.experienceLevel,
+      userData.learningPreferences
+    ]];
+
+    await sheets.spreadsheets.values.update({
+      spreadsheetId,
+      range: updateRange,
+      valueInputOption: 'RAW',
+      requestBody: {
+        values: updateValues,
+      },
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error('Error updating user data:', error);
+    return { success: false, error: 'Failed to update user data' };
+  }
+}
+
 export async function checkEmailExists(email: string) {
   try {
     const spreadsheetId = process.env.GOOGLE_SHEET_ID;
@@ -45,7 +95,7 @@ export async function checkEmailExists(email: string) {
     });
 
     const values = response.data.values || [];
-    const emails = values.flat().map(row => row.toString().toLowerCase());
+    const emails = values.flat().map((row: any) => row.toString().toLowerCase());
     
     return emails.includes(email.toLowerCase());
   } catch (error) {

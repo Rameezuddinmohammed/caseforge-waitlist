@@ -11,6 +11,9 @@ type InputForm = {
     idle: string
     loading: string
   }
+  name?: string
+  type?: string
+  placeholder?: string
 } & React.HTMLAttributes<HTMLInputElement>
 
 type State = "idle" | "loading" | "success" | "error"

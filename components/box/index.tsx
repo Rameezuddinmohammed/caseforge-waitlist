@@ -3,7 +3,7 @@ import type { PropsWithChildren } from "react"
 import { ThemeSwitcher } from "../switch-theme"
 import Image from "next/image"
 
-export async function WaitlistWrapper({ children }: PropsWithChildren) {
+export function WaitlistWrapper({ children }: PropsWithChildren) {
   return (
     <div
       className={clsx(
@@ -28,7 +28,34 @@ export async function WaitlistWrapper({ children }: PropsWithChildren) {
         <div className="flex flex-col gap-10">{children}</div>
       </div>
       <footer className="flex justify-between items-center w-full self-stretch px-8 py-3 text-sm bg-gray-12/[.07] overflow-hidden backdrop-blur-sm">
-        <p className="text-xs text-slate-10">© 2024 Caseforge. All rights reserved.</p>
+        <div className="flex items-center gap-2 text-xs text-slate-10">
+          <a 
+            href="https://facebook.com/caseforge" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="hover:text-slate-12 transition-colors"
+          >
+            Facebook
+          </a>
+          <span className="text-slate-8">|</span>
+          <a 
+            href="https://linkedin.com/company/caseforge" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="hover:text-slate-12 transition-colors"
+          >
+            LinkedIn
+          </a>
+          <span className="text-slate-8">|</span>
+          <a 
+            href="https://instagram.com/caseforge" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="hover:text-slate-12 transition-colors"
+          >
+            Instagram
+          </a>
+        </div>
         <ThemeSwitcher />
       </footer>
     </div>
