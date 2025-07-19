@@ -30,7 +30,7 @@ export function WaitlistWrapper({ children }: PropsWithChildren) {
       <footer className="flex justify-between items-center w-full self-stretch px-8 py-3 text-sm bg-gray-12/[.07] overflow-hidden backdrop-blur-sm">
         <div className="flex items-center gap-2 text-xs text-slate-10">
           <a 
-            href="https://facebook.com/caseforge" 
+            href="https://facebook.com/CaseforgeApp" 
             target="_blank" 
             rel="noopener noreferrer"
             className="hover:text-slate-12 transition-colors"
@@ -39,7 +39,7 @@ export function WaitlistWrapper({ children }: PropsWithChildren) {
           </a>
           <span className="text-slate-8">|</span>
           <a 
-            href="https://linkedin.com/company/caseforge" 
+            href="https://linkedin.com/company/CaseforgeApp" 
             target="_blank" 
             rel="noopener noreferrer"
             className="hover:text-slate-12 transition-colors"
@@ -48,7 +48,7 @@ export function WaitlistWrapper({ children }: PropsWithChildren) {
           </a>
           <span className="text-slate-8">|</span>
           <a 
-            href="https://instagram.com/caseforge" 
+            href="https://instagram.com/CaseforgeApp" 
             target="_blank" 
             rel="noopener noreferrer"
             className="hover:text-slate-12 transition-colors"
