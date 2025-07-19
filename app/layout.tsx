@@ -3,8 +3,7 @@ import type { Viewport } from "next"
 import { Geist } from "next/font/google"
 import { Providers } from "@/context"
 import { Header } from "@/components/header"
-import { supabaseAdmin } from "@/lib/supabase/server"
-import SpotlightContainer from "@/components/spotlight-container" // Updated import
+import SpotlightContainer from "@/components/spotlight-container"
 import "./globals.css"
 
 const geistSans = Geist({
@@ -25,8 +24,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const { data: settings } = await supabaseAdmin.from("settings").select("*").single()
-
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -34,10 +31,8 @@ export default async function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className={`${geistSans.className} antialiased max-w-screen min-h-svh bg-black text-slate-12`}>
-        <Providers defaultTheme={settings?.default_theme || "system"} forcedTheme={settings?.forced_theme}>
+        <Providers defaultTheme="system" forcedTheme={undefined}>
           <SpotlightContainer>
-            {" "}
-            {/* Wrapped content with SpotlightContainer */}
             <div className="max-w-screen-sm mx-auto w-full relative z-[1] flex flex-col min-h-screen">
               <div className="px-5 gap-8 flex flex-col flex-1 py-[12vh]">
                 <Header />
@@ -52,5 +47,5 @@ export default async function RootLayout({
 }
 
 export const metadata = {
-      generator: 'v0.dev'
-    };
+  generator: 'v0.dev'
+};

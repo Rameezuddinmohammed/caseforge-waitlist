@@ -1,9 +1,11 @@
-import { supabaseAdmin } from "@/lib/supabase/server"
 import { NavbarLink, NavbarLinkBackground } from "./link"
 import clsx from "clsx"
 
 export const Header = async () => {
-  const { data: navbarItems } = await supabaseAdmin.from("navbar_items").select("*").order("order_index")
+  const navbarItems = [
+    { title: "Waitlist", href: "/" },
+    { title: "Manifesto", href: "/manifesto" }
+  ]
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -16,11 +18,11 @@ export const Header = async () => {
           )}
         >
           {/* Animated background */}
-          <NavbarLinkBackground links={(navbarItems || []).map((item) => item.href || "/")} />
+          <NavbarLinkBackground links={navbarItems.map((item) => item.href)} />
 
           {/* Navigation items */}
-          {(navbarItems || []).map((item) => (
-            <NavbarLink key={item.href} href={item.href || "/"}>
+          {navbarItems.map((item) => (
+            <NavbarLink key={item.href} href={item.href}>
               {item.title}
             </NavbarLink>
           ))}
